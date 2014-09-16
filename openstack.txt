@@ -1,9 +1,0 @@
-Installing Rackspace Private Cloud 2.0 on Physical Hardware
-http://www.rackspace.com/knowledge_center/article/installing-rackspace-private-cloud-20-on-physical-hardware
-
-Ubuntu Cloud Infrastructure
-https://help.ubuntu.com/community/UbuntuCloudInfrastructure
-
-Juju Quick Start
-https://maas.ubuntu.com/docs/juju-quick-start.html
-
