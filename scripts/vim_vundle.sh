@@ -3,7 +3,7 @@
 # Install vim vundle
 
 ## Remove the bundle folde if exsits
-if [ ! -d "~/.vim/bundle" ]; then
+if [ -d "~/.vim/bundle" ]; then
     rm -rf "~/.vim/bundle"
 fi
 
