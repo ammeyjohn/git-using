@@ -11,5 +11,9 @@ brew cask install evernote
 
 ## Develop
 brew cask install iterm2
-brew cask install macvim 
 brew cask install virtualbox
+brew cask install sourcetree
+
+### IDE
+brew cask install sublime-text
+brew cask install macvim 
