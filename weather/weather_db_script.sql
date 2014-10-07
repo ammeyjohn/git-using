@@ -3,6 +3,7 @@
 */
 CREATE DATABASE IF NOT EXISTS weather;
 
+USE weahter;
 
 /*
 * station

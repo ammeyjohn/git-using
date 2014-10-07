@@ -26,12 +26,23 @@ sigma = zeros(1, size(X, 2));
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
 
+% Get the features count
+n = size(X, 2);
+
+% Get the training example count
+m = size(X, 1);
 
 
+for f = 1 : n
+    mu(f) = mean(X(:,f));
+    sigma(f) = sum(X(:,f));
 
-
-
-
+    for i = 1 : m
+        v = X(i, f);
+        v = (v - mu(f)) / std(X(:, f));
+        X_norm(i, f) = v;
+    end
+end
 
 
 % ============================================================

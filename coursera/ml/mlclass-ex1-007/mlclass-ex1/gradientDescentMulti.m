@@ -17,15 +17,23 @@ for iter = 1:num_iters
     %       of the cost function (computeCostMulti) and gradient here.
     %
 
+    % Get feature count
+    n = size(X, 2);
 
+    % To temperary store the new theta values
+    tt = zeros(n, 1);
 
+    for f = 1 : n
+        s = 0;
+        for i = 1 : m
+            h = computeHypothesis(X(i,:), theta, m, n);
+            d = h - y(i);
+            s += d * X(i,f);
+        end
+        tt(f) = theta(f) - alpha * s / m;
+    end
 
-
-
-
-
-
-
+    theta = tt;
 
     % ============================================================
 
@@ -33,5 +41,15 @@ for iter = 1:num_iters
     J_history(iter) = computeCostMulti(X, y, theta);
 
 end
+
+end
+
+
+function h = computeHypothesis(rx, theta, m, n)
+    
+    h = 0;
+    for f = 1 : n
+        h += theta(f) * rx(f);
+    end 
 
 end

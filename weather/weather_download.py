@@ -8,11 +8,7 @@ import sys
 from datetime import date, datetime, timedelta
 import urllib2
 import MySQLdb
-
-MYSQL_HOST      = 'localhost'
-MYSQL_USER      = 'root'
-MYSQL_PASSWORD  = 'root'
-MYSQL_DB        = 'weather'
+import weather_settings.py
 
 class Weather():
 
@@ -22,7 +18,7 @@ class Weather():
         self.Temperature    = 0.0
         self.DewPoint       = 0.0
         self.Humidity       = 0
-        self.SeaLevelPressure = 0
+        self.SeaLevelPressure = 0.0
         self.Visibility     = 0.0
         self.WindDirection  = None
         self.WindSpeed      = 0.0
@@ -39,7 +35,7 @@ class Weather():
 def insert (weather):
     w = weather
     try:
-        commandText = """INSERT INTO weather(time,
+        commandText = """INSERT INTO weather_zsss(time,
                                              temperature,
                                              dew_point,
                                              humidity,
@@ -83,7 +79,7 @@ def delete (time0, time1):
         conn = MySQLdb.connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DB, charset='utf8')
         with conn: 
             cur = conn.cursor() 
-            cur.execute('DELETE FROM weather WHERE Time >= %s AND Time <= %s', (time0, time1))
+            cur.execute('DELETE FROM weather_zsss WHERE Time >= %s AND Time <= %s', (time0, time1))
             # print(cur._last_executed)
     except MySQLdb.Error, e:
         print 'Error %d: %s' % (e.args[0], e.args[1])
@@ -129,7 +125,7 @@ def ParseHtml(html, date):
         w.Temperature = float(cells[1])
         w.DewPoint = float(cells[2])
         w.Humidity = float(cells[3])
-        w.SeaLevelPressure = int(cells[4])
+        w.SeaLevelPressure = float(cells[4])
         w.Visibility = float(cells[5])
         w.WindDirection = cells[6]
         w.WindSpeed = -9999.0 if cells[7].isalpha() else float(cells[7])
