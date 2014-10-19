@@ -20,13 +20,54 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
+n = size(X, 2);
 
+iter = 1000;
+alpha = 0.03;
 
+for it = 1 : iter
 
+    %fprintf('Iteration: %d \n', it);
+    
+    h = X * theta;
+    fprintf('h = %f \n', h(1:10,:));
 
+    % Compute H
+    H = sigmoid(X * theta);
+    fprintf('H = %f \n', H(1:10,:));
 
+    % Shink theta
+    theta_updated = zeros(size(theta));
+    for f = 1 : n
+        s = 0;
+        for i = 1 : m
+            s += (H(i) - y(i)) * X(i, f);
+        end
+        grad(f) = s / m;
 
+        theta_updated(f) = theta(f) - alpha * grad(f);
+    end
+
+    %fprintf('grad = %f \n', grad);
+    
+    % Compute J
+    s = 0;
+    for i = 1 : m
+        s += -y(i) * log(H(i)) - (1 - y(i)) * log(1 - H(i));
+    end
+    J = s / m;
+
+    fprintf('s = %f, m = %d, J = %f \n', s, m, J);
+
+    % Update theta simultaneously
+    theta = theta_updated;
+
+    fprintf('theta = %f \n', theta);
+    pause;
+
+end
 
 % =============================================================
 
 end
+

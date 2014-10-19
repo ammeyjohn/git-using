@@ -10,8 +10,13 @@ g = zeros(size(z));
 %               vector or scalar).
 
 
+[n, m] = size(z);
 
-
+for i = 1 : n
+    for j = 1 : m
+        g(i,j) = 1 / (1 + e ^ (-z(i, j)));
+    end
+end
 
 % =============================================================
 
