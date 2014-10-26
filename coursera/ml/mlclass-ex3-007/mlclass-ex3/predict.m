@@ -22,11 +22,19 @@ p = zeros(size(X, 1), 1);
 %
 
 
+% Compute the input layer
+A1 = [ones(m, 1) X];
 
+% Compute the hidden layer
+Z2 = Theta1 * A1';
+A2 = [ones(m, 1) sigmoid(Z2)'];
 
+% Compute the output layer
+Z3 = Theta2 * A2';
+A3 = sigmoid(Z3)';
 
-
-
+% Compute the prediction
+[W, p] = max(A3, [], 2);
 
 
 % =========================================================================

@@ -36,13 +36,21 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
+% Compute hypothesis
+h = sigmoid(X * theta);
 
+% Compute regularized cost function J
+J = sum(-y' * log(h) - (1 - y)' * log(1 - h)) / m + lambda / 2 / m * sum(theta(2:end) .^ 2);
+% fprintf('J = %f \n', J);
 
+% Compute partial derivatives
+grad = (X' * (h - y)) / m;
 
-
-
-
-
+% Compute gradient descent
+temp = (lambda / m) * theta;
+temp(1) = 0;
+grad = grad + temp;
+% fprintf('size of grad = %d %d \n', size(grad));
 
 
 % =============================================================
