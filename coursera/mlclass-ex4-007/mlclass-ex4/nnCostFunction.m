@@ -62,22 +62,64 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+fprintf('Number of labels = %d \n', num_labels);
 
+% unroll vector y
+Y = zeros(m, num_labels);
+for i = 1 : m
+    l = y(i);
+    Y(i, l) = 1;
+end
 
+% Add x0 = 1 to matrix X
+a1 = [ones(m, 1), X];
 
+% Compute hypothesis
+z2 = Theta1 * a1';
+a2 = sigmoid(z2);
+a2 = [ones(m, 1) a2'];
 
+z3 = Theta2 * a2';
+a3 = sigmoid(z3);
 
+h = a3';
 
+% Compute cost function
+s = 0;
+for i = 1 : m
+    for k = 1 : num_labels
+        s += -Y(i, k) * log(h(i, k)) - (1 - Y(i, k)) * log(1 - h(i, k));
+    end
+end
+J = s / m;
 
+fprintf('J = %f \n', J);
 
+if lambda != 0
 
+    % Compute regularized cost function
 
+    % Theta1
+    s1 = 0;
+    for j = 1 : hidden_layer_size
+        for k = 2 : input_layer_size + 1
+            s1 += Theta1(j, k) ^ 2;  
+        end
+    end
 
+    % Theta2
+    s2 = 0;
+    for j = 1 : num_labels 
+        for k = 2 : hidden_layer_size + 1
+            s2 += Theta2(j, k) ^ 2;  
+        end
+    end
 
+    J += lambda * (s1 + s2) / 2 / m;
 
+    fprintf('regularized J = %f \n', J);
 
-
-
+end
 
 
 % -------------------------------------------------------------

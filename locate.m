@@ -1,1 +1,1 @@
-cd ./coursera/ml/mlclass-ex3-007/mlclass-ex3
+cd ./coursera/mlclass-ex4-007/mlclass-ex4
