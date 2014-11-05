@@ -62,7 +62,7 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
-fprintf('Number of labels = %d \n', num_labels);
+% fprintf('Number of labels = %d \n', num_labels);
 
 % unroll vector y
 Y = zeros(m, num_labels);
@@ -93,7 +93,7 @@ for i = 1 : m
 end
 J = s / m;
 
-fprintf('J = %f \n', J);
+% fprintf('J = %f \n', J);
 
 if lambda != 0
 
@@ -117,8 +117,43 @@ if lambda != 0
 
     J += lambda * (s1 + s2) / 2 / m;
 
-    fprintf('regularized J = %f \n', J);
+    % fprintf('regularized J = %f \n', J);
 
+end
+
+% Implement backpropagation
+
+% sigma3
+sigma3 = a3' - Y;
+
+% sigma2
+g = [ones(m, 1) sigmoidGradient(z2)'];
+sigma2 = (Theta2' * sigma3')' .* g;
+
+% delta
+Theta2_grad = (Theta2_grad + sigma3' * a2) ./ m;
+
+grad1 = sigma2' * a1;
+grad1 = grad1(2:end,:);
+Theta1_grad = (Theta1_grad + grad1) ./ m;
+
+% Regularized gradient
+
+% Theta1
+s1 = 0;
+for j = 1 : hidden_layer_size
+    for k = 2 : input_layer_size + 1
+        s1 += Theta1(j, k);  
+    end
+end
+s1 = lambd
+
+% Theta2
+s2 = 0;
+for j = 1 : num_labels 
+    for k = 2 : hidden_layer_size + 1
+        s2 += Theta2(j, k) ^ 2;  
+    end
 end
 
 
