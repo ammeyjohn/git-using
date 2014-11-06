@@ -139,21 +139,17 @@ Theta1_grad = (Theta1_grad + grad1) ./ m;
 
 % Regularized gradient
 
-% Theta1
-s1 = 0;
-for j = 1 : hidden_layer_size
-    for k = 2 : input_layer_size + 1
-        s1 += Theta1(j, k);  
-    end
-end
-s1 = lambd
+if lambda != 0
 
-% Theta2
-s2 = 0;
-for j = 1 : num_labels 
-    for k = 2 : hidden_layer_size + 1
-        s2 += Theta2(j, k) ^ 2;  
-    end
+	% Compute regularized gradient
+	
+	% should not regularizing the first column of theta
+	t1 = Theta1; t1(:, 1) = 0;
+	t2 = Theta2; t2(:, 1) = 0;
+
+	Theta1_grad = Theta1_grad + t1 * (lambda / m);
+	Theta2_grad = Theta2_grad + t2 * (lambda / m);
+
 end
 
 
