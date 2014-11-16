@@ -1,2 +1,2 @@
-PS1(">> ");
-cd ./coursera/mlclass-ex5-007/mlclass-ex5
+% PS1(">> ");
+cd ./coursera/mlclass-ex6-007/mlclass-ex6
