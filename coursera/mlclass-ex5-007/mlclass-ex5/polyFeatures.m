@@ -15,9 +15,12 @@ X_poly = zeros(numel(X), p);
 %
 % 
 
+% The column 1 holds the original values of X
+X_poly(:,1) = X;
 
-
-
+for i = 2 : p
+   X_poly(:,i) = X .^ i 
+end
 
 
 % =========================================================================
