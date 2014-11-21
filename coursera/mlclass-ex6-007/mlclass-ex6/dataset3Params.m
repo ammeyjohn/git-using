@@ -23,11 +23,22 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+c_vec = [0.01 0.03 0.1 0.3 1 3 10 30];
+sigma_vec = [0.01 0.03 0.1 0.3 1 3 10 30];
+err_vec = zeros(length(c_vec) * length(sigma_vec));
 
+for ci = 1 : length(c_vec)
+	for si = 1 : length(sigma_vec)
+		c = c_vec(ci);
+		s = sigma_vec(si);
 
+		% Try to train the svm model by C and sigma
+		model= svmTrain(X, y, c, @(x1, x2) gaussianKernel(x1, x2, sigma));
+		predictions = svmPredict(model, Xval);
+		error = means(double(predictions ~= yval));
 
-
-
+	end
+end
 
 % =========================================================================
 
